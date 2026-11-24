@@ -1,0 +1,18 @@
+{
+  "name": "idle-wardrobe-remake",
+  "version": "1.0.0",
+  "description": "RE:CLOTHES 拾衣研究所 — 閒置單品改造與風格穿搭重構提案所 (商業設計系 CD000B 第8組期末專題)",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "fashion",
+    "upcycling",
+    "ai-agent",
+    "commercial-design",
+    "vibe-coding"
+  ],
+  "author": "CD000B Group 8 (吳佳晏, 劉是曼, 洪巧恩, 楊承歡)",
+  "license": "MIT"
+}

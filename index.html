@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RE:CLOTHES 拾衣研究所 — 閒置單品改造與風格穿搭提案所</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              900: '#064e3b',
+              950: '#022c22',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#0c0e12] text-neutral-100 min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-neutral-950">
+
+  <!-- 頂部導航欄 (Sticky Navigation Bar) -->
+  <header class="sticky top-0 z-40 border-b border-neutral-800/80 bg-[#0c0e12]/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- 品牌 Logo 與標題 -->
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 font-bold text-neutral-950 text-base">
+          RE
+        </div>
+        <div>
+          <span class="text-base font-extrabold tracking-tight text-white flex items-center">
+            RE:CLOTHES <span class="text-emerald-400 ml-1.5 font-normal text-xs px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-500/30">拾衣研究所</span>
+          </span>
+          <span class="text-[10px] text-neutral-400 block -mt-0.5">商業設計系 · 自然科學與人工智慧 期末專題</span>
+        </div>
+      </div>
+
+      <!-- 快速錨點導覽與組別資訊 -->
+      <nav class="hidden md:flex items-center space-x-6 text-xs font-medium text-neutral-300">
+        <a href="#cases-section" class="hover:text-emerald-400 transition-colors flex items-center space-x-1">
+          <span>🏛️ 首頁精選案例牆</span>
+        </a>
+        <a href="#try-section" class="hover:text-emerald-400 transition-colors flex items-center space-x-1">
+          <span>✨ 專屬提案試用區</span>
+        </a>
+        <a href="#data-management" class="hover:text-emerald-400 transition-colors flex items-center space-x-1">
+          <span>⚙️ 資料管理 (CRUD)</span>
+        </a>
+      </nav>
+
+      <!-- 右側動作按鈕 -->
+      <div class="flex items-center space-x-2.5">
+        <button onclick="openCreateModal()" 
+          class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-500 text-neutral-950 hover:bg-emerald-400 transition-all shadow-md shadow-emerald-500/20 flex items-center space-x-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+          </svg>
+          <span>新增案例</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 主內容區 (Main Content) -->
+  <main class="flex-grow">
+
+    <!-- Hero 英雄板塊 (Hero Section) -->
+    <section class="relative overflow-hidden py-16 sm:py-24 border-b border-neutral-800/80">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-emerald-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-semibold bg-neutral-900 border border-neutral-700 text-neutral-300 mb-6">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>CD000B 第 8 組：吳佳晏 · 劉是曼 · 洪巧恩 · 楊承歡</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6 leading-tight">
+          閒置單品改造與風格穿搭重構<br>
+          <span class="text-gradient-emerald">原單品 ➔ 改造／搭配方向</span>
+        </h1>
+
+        <p class="text-sm sm:text-base text-neutral-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          每件塵封在衣櫃深處的衣服，都藏著煥然一新的可能性。我們結合商業設計思維與 AI Prompt 靈感生成，提供從「痛點深度拆解」、「穿搭平衡建議」到「免縫紉／微工藝結構改造」的完整指南。
+        </p>
+
+        <!-- 數據統計與核心亮點標籤 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto text-left">
+          <div class="glass-card p-3.5 rounded-xl border-neutral-800">
+            <div class="text-xs text-neutral-400">目前收錄</div>
+            <div id="stat-case-count" class="text-xl font-extrabold text-emerald-400 mt-0.5">6 件</div>
+            <div class="text-[10px] text-neutral-400">經典單品改造庫</div>
+          </div>
+          <div class="glass-card p-3.5 rounded-xl border-neutral-800">
+            <div class="text-xs text-neutral-400">案例詳情頁</div>
+            <div class="text-xl font-extrabold text-neutral-100 mt-0.5">4 大維度</div>
+            <div class="text-[10px] text-neutral-400">痛點 / 搭配 / 結構 / Prompt</div>
+          </div>
+          <div class="glass-card p-3.5 rounded-xl border-neutral-800">
+            <div class="text-xs text-neutral-400">試用專區</div>
+            <div class="text-xl font-extrabold text-amber-300 mt-0.5">即時 AI</div>
+            <div class="text-[10px] text-neutral-400">自訂條件產生專屬提案</div>
+          </div>
+          <div class="glass-card p-3.5 rounded-xl border-neutral-800">
+            <div class="text-xs text-neutral-400">資料管理</div>
+            <div class="text-xl font-extrabold text-blue-400 mt-0.5">全功能 CRUD</div>
+            <div class="text-[10px] text-neutral-400">本地持久化與即時儲存</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 首頁精選案例牆 (Featured Cases Wall) -->
+    <section id="cases-section" class="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- 區塊標題與說明 -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-neutral-800">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-1 flex items-center">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2"></span>
+            FEATURED CASES WALL
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-neutral-100">
+            首頁精選案例牆
+          </h2>
+          <p class="text-xs sm:text-sm text-neutral-400 mt-1">
+            每張卡片展示「原單品 → 改造／搭配方向」，點擊即可探索該單品之痛點剖析、搭配與結構構想。
+          </p>
+        </div>
+
+        <!-- CRUD 資料管理快捷工具列 -->
+        <div id="data-management" class="mt-4 md:mt-0 flex flex-wrap items-center gap-2">
+          <button onclick="openCreateModal()" 
+            class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-neutral-800 hover:bg-neutral-700 text-emerald-300 border border-emerald-500/30 transition-colors flex items-center space-x-1">
+            <span>+ 新增自訂案例</span>
+          </button>
+          <button onclick="resetToPresetCases()" 
+            class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700 transition-colors flex items-center space-x-1"
+            title="若編輯或刪除後想回到最初預設展示版本，可點此復原">
+            <span>🔄 恢復預設範例</span>
+          </button>
+          <button onclick="exportCasesJSON()" 
+            class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-neutral-900 hover:bg-neutral-800 text-neutral-400 border border-neutral-800 transition-colors">
+            💾 匯出 JSON
+          </button>
+          <button onclick="importCasesJSON()" 
+            class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-neutral-900 hover:bg-neutral-800 text-neutral-400 border border-neutral-800 transition-colors">
+            📂 匯入備份
+          </button>
+          <input type="file" id="import-file-input" class="hidden" accept=".json">
+        </div>
+      </div>
+
+      <!-- 篩選列 (Category Pills & Difficulty & Search Bar) -->
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-8">
+        
+        <!-- 單品分類標籤群 -->
+        <div class="flex items-center space-x-1.5 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+          <button data-category="all" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-500 text-neutral-950 transition-all shrink-0">
+            全部單品
+          </button>
+          <button data-category="襯衫" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-medium bg-neutral-800 text-neutral-300 hover:bg-neutral-700 transition-all shrink-0">
+            襯衫
+          </button>
+          <button data-category="丹寧/牛仔" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-medium bg-neutral-800 text-neutral-300 hover:bg-neutral-700 transition-all shrink-0">
+            丹寧/牛仔
+          </button>
+          <button data-category="T恤/衛衣" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-medium bg-neutral-800 text-neutral-300 hover:bg-neutral-700 transition-all shrink-0">
+            T恤/衛衣
+          </button>
+          <button data-category="西裝外套" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-medium bg-neutral-800 text-neutral-300 hover:bg-neutral-700 transition-all shrink-0">
+            西裝外套
+          </button>
+          <button data-category="洋裝/裙裝" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-medium bg-neutral-800 text-neutral-300 hover:bg-neutral-700 transition-all shrink-0">
+            洋裝/裙裝
+          </button>
+          <button data-category="其他" class="category-pill px-3.5 py-1.5 rounded-xl text-xs font-medium bg-neutral-800 text-neutral-300 hover:bg-neutral-700 transition-all shrink-0">
+            其他配件
+          </button>
+        </div>
+
+        <!-- 難度下拉選單與即時搜尋框 -->
+        <div class="flex items-center space-x-3">
+          <select id="filter-difficulty" class="bg-neutral-900 border border-neutral-700 text-neutral-200 text-xs rounded-xl px-3 py-2 focus:ring-1 focus:ring-emerald-500 outline-none">
+            <option value="all">⚡ 全部難度</option>
+            <option value="新手友好">新手友好 (免針線)</option>
+            <option value="微工藝">微工藝 (基礎手縫)</option>
+            <option value="裁縫進階">裁縫進階 (結構重塑)</option>
+          </select>
+
+          <div class="relative flex-grow sm:w-64">
+            <input type="text" id="search-input" placeholder="搜尋單品、痛點或風格..." 
+              class="w-full bg-neutral-900 border border-neutral-700 text-neutral-200 text-xs rounded-xl pl-8 pr-3 py-2 focus:ring-1 focus:ring-emerald-500 outline-none">
+            <svg class="w-4 h-4 text-neutral-500 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 案例卡片網格 (Cards Grid) -->
+      <div id="cases-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 由 app.js 動態渲染卡片 -->
+      </div>
+
+      <!-- 搜尋無結果狀態 -->
+      <div id="cases-empty-state" class="hidden text-center py-16">
+        <div class="text-4xl mb-3">🔍</div>
+        <h3 class="text-base font-bold text-neutral-300">查無符合條件的單品案例</h3>
+        <p class="text-xs text-neutral-500 mt-1">請嘗試變更篩選類別或搜尋關鍵字，或親自新增一筆案例！</p>
+      </div>
+
+    </section>
+
+    <!-- 自己的試用區：智慧 AI 改造與搭配提案產生器 (Try-it-yourself Generator) -->
+    <section id="try-section" class="py-16 bg-neutral-950/60 border-t border-b border-neutral-800">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-10">
+          <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950/70 border border-emerald-500/30 text-emerald-300 mb-3">
+            <span>✨ 互動試用體驗區</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-neutral-100">
+            輸入你的閒置單品，立即獲得專屬改造提案
+          </h2>
+          <p class="text-xs sm:text-sm text-neutral-400 mt-2 max-w-xl mx-auto">
+            衣櫃裡也有不知如何搭配或版型不適的舊衣嗎？填寫你的衣物條件，系統將結合痛點拆解邏輯為你產生專屬搭配、結構微改指南與生圖 Prompt！
+          </p>
+
+          <!-- 快速範例帶入按鈕 -->
+          <div class="flex flex-wrap items-center justify-center gap-2 mt-4">
+            <span class="text-xs text-neutral-500">快速帶入範例：</span>
+            <button onclick="loadSampleInput(0)" class="px-2.5 py-1 rounded-lg text-xs bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700 transition-colors">
+              👔 過長格子襯衫
+            </button>
+            <button onclick="loadSampleInput(1)" class="px-2.5 py-1 rounded-lg text-xs bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700 transition-colors">
+              👗 緊身碎花洋裝
+            </button>
+            <button onclick="loadSampleInput(2)" class="px-2.5 py-1 rounded-lg text-xs bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700 transition-colors">
+              👕 鬆垮荷葉邊白T
+            </button>
+            <button onclick="loadSampleInput(3)" class="px-2.5 py-1 rounded-lg text-xs bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700 transition-colors">
+              🧥 寬厚墊肩西裝外套
+            </button>
+          </div>
+        </div>
+
+        <!-- 試用表單 (Input Form) -->
+        <div class="glass-panel p-6 sm:p-8 rounded-2xl border-neutral-800 mb-8">
+          <form id="try-generator-form" class="space-y-5">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-neutral-300 mb-1.5">
+                  1. 你的閒置單品名稱 <span class="text-rose-400">*</span>
+                </label>
+                <input type="text" id="try-name" required placeholder="例如：買太大的厚重落肩格子襯衫、穿不下的牛仔褲"
+                  class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-neutral-200 focus:ring-1 focus:ring-emerald-500 outline-none">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-neutral-300 mb-1.5">
+                  2. 單品材質與顏色
+                </label>
+                <input type="text" id="try-material" placeholder="例如：純棉深藍格紋、重磅挺版丹寧、薄雪紡"
+                  class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-neutral-200 focus:ring-1 focus:ring-emerald-500 outline-none">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-neutral-300 mb-1.5">
+                3. 目前最主要的痛點或閒置原因 <span class="text-rose-400">*</span>
+              </label>
+              <textarea id="try-pain" rows="2" required placeholder="例如：下擺過長遮住腿部顯得五五身、領口洗鬆下垂、風格過於正式平常無法穿出門..."
+                class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-neutral-200 focus:ring-1 focus:ring-emerald-500 outline-none"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-neutral-300 mb-1.5">
+                  4. 期望改造目標或風格氛圍
+                </label>
+                <input type="text" id="try-style" placeholder="例如：日系 CityBoy、俐落短版極簡、甜酷工裝風"
+                  class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-neutral-200 focus:ring-1 focus:ring-emerald-500 outline-none">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-neutral-300 mb-1.5">
+                  5. 偏好的處置形式
+                </label>
+                <select id="try-mode" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-neutral-200 focus:ring-1 focus:ring-emerald-500 outline-none">
+                  <option value="穿搭搭配">👗 零剪裁 · 純穿搭層次搭配 (不破壞衣物)</option>
+                  <option value="結構微改" selected>✂️ 微工藝 · 局部剪裁與抽繩改造 (初學者友善)</option>
+                  <option value="徹底翻新">🪡 結構翻新 · 拆解重構成配件或兩件式 (進階手工)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pt-2 text-center">
+              <button type="submit" 
+                class="w-full sm:w-auto px-8 py-3 rounded-xl text-sm font-bold bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-neutral-950 shadow-lg shadow-emerald-500/20 transition-all transform hover:-translate-y-0.5">
+                ✨ 立即產生 AI 改造與搭配提案
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- 載入中動畫區 -->
+        <div id="try-loading-area" class="hidden text-center py-12">
+          <div class="inline-block w-10 h-10 border-4 border-emerald-500/20 border-t-emerald-400 rounded-full animate-spin mb-4"></div>
+          <div class="text-sm font-bold text-neutral-200">AI 正在深度透視單品結構與痛點...</div>
+          <div class="text-xs text-neutral-400 mt-1">正在生成風格對比方向、穿搭公式與專屬生圖 Prompt</div>
+        </div>
+
+        <!-- 生成結果展示區 (動態填入) -->
+        <div id="try-result-area" class="hidden">
+          <div id="try-output-content"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 頁尾 (Footer) -->
+  <footer class="border-t border-neutral-800 bg-[#090b0e] py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-neutral-400 space-y-2">
+      <div class="flex items-center justify-center space-x-2 text-neutral-300 font-semibold">
+        <span>RE:CLOTHES 拾衣研究所</span>
+        <span>·</span>
+        <span>115 學年度第 1 學期 自然科學與人工智慧 期末專題</span>
+      </div>
+      <div>
+        商業設計系 CD000B 第 8 組：吳佳晏（11533216） · 劉是曼 · 洪巧恩 · 楊承歡
+      </div>
+      <p class="text-[11px] text-neutral-400">
+        作品支援完整 CRUD 資料管理與 LocalStorage 本地儲存 · 可一鍵部署於 Vercel
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==================== MODALS 彈窗系統 ==================== -->
+
+  <!-- 1. 案例詳情頁 Modal (包含：痛點分析、穿搭建議、結構改造構想、Prompt 紀錄) -->
+  <div id="detail-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-sm">
+    <div class="relative w-full max-w-3xl bg-[#12161f] border border-neutral-700/80 rounded-2xl p-6 sm:p-8 shadow-2xl my-8">
+      
+      <!-- 關閉按鈕 -->
+      <button onclick="closeDetailModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white p-1 rounded-lg hover:bg-neutral-800 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- 動態載入詳情內容 -->
+      <div id="detail-modal-body"></div>
+
+    </div>
+  </div>
+
+  <!-- 2. CRUD: 新增 / 編輯案例 Modal (Create / Update Modal) -->
+  <div id="edit-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-sm">
+    <div class="relative w-full max-w-2xl bg-[#12161f] border border-neutral-700/80 rounded-2xl p-6 sm:p-8 shadow-2xl my-8">
+      
+      <button onclick="closeEditModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white p-1 rounded-lg hover:bg-neutral-800 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <h3 id="edit-modal-title" class="text-xl font-bold text-neutral-100 mb-6">
+        ✨ 編輯單品改造案例
+      </h3>
+
+      <form id="edit-case-form" class="space-y-4">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-neutral-300 mb-1">
+              原單品名稱 <span class="text-rose-400">*</span>
+            </label>
+            <input type="text" id="form-original" required placeholder="如：寬鬆落肩格紋襯衫"
+              class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-neutral-200 outline-none focus:ring-1 focus:ring-emerald-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-neutral-300 mb-1">
+              改造／搭配方向 <span class="text-rose-400">*</span>
+            </label>
+            <input type="text" id="form-direction" required placeholder="如：日系短版層次抽繩罩衫"
+              class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-neutral-200 outline-none focus:ring-1 focus:ring-emerald-500">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-neutral-300 mb-1">類別</label>
+            <select id="form-category" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-neutral-200 outline-none">
+              <option value="襯衫">襯衫</option>
+              <option value="丹寧/牛仔">丹寧/牛仔</option>
+              <option value="T恤/衛衣">T恤/衛衣</option>
+              <option value="西裝外套">西裝外套</option>
+              <option value="洋裝/裙裝">洋裝/裙裝</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-neutral-300 mb-1">難易度</label>
+            <select id="form-difficulty" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-neutral-200 outline-none">
+              <option value="新手友好">新手友好 (免針線)</option>
+              <option value="微工藝">微工藝 (基礎手縫)</option>
+              <option value="裁縫進階">裁縫進階 (結構拆解)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-neutral-300 mb-1">預估時間</label>
+            <input type="text" id="form-time" placeholder="如：40 分鐘"
+              class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-neutral-200 outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-neutral-300 mb-1">
+            單品痛點分析 (每行一項)
+          </label>
+          <textarea id="form-pain" rows="2" placeholder="衣長過長顯矮&#10;格子花色過時缺乏挺度"
+            class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-neutral-200 outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-neutral-300 mb-1">
+            穿搭搭配建議 (每行一項)
+          </label>
+          <textarea id="form-styling" rows="2" placeholder="內搭白色高領素色內著&#10;下擺解開打結縮小腰身"
+            class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-neutral-200 outline-none"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-neutral-300 mb-1">所需工具 (頓號分隔)</label>
+            <input type="text" id="form-tools" placeholder="布剪、針線、抽繩"
+              class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-neutral-200 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-neutral-300 mb-1">結構改造構想步驟 (每行一項)</label>
+            <textarea id="form-steps" rows="2" placeholder="沿肚臍上方裁短&#10;下擺穿入抽繩收口"
+              class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-neutral-200 outline-none"></textarea>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-neutral-300 mb-1">
+            AI 生圖 Prompt 紀錄 (英文)
+          </label>
+          <input type="text" id="form-prompt-en" placeholder="Editorial photo of upcycled..."
+            class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs font-mono text-emerald-300 outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-neutral-300 mb-1">
+            Prompt 中文註解
+          </label>
+          <input type="text" id="form-prompt-zh" placeholder="時尚大片寫真..."
+            class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-neutral-300 outline-none">
+        </div>
+
+        <div class="pt-4 flex items-center justify-end space-x-3 border-t border-neutral-800">
+          <button type="button" onclick="closeEditModal()" 
+            class="px-4 py-2 rounded-xl text-xs font-semibold bg-neutral-800 hover:bg-neutral-700 text-neutral-300 transition-colors">
+            取消
+          </button>
+          <button type="submit" 
+            class="px-5 py-2 rounded-xl text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-neutral-950 transition-colors shadow-md">
+            儲存案例並即時更新
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Toast 訊息提示容器 -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <!-- 載入腳本 -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
